@@ -13,12 +13,11 @@ export async function loadPost(id: string): Promise<Post | null> {
   try {
     text = await Deno.readTextFile(`./data/posts/${id}.md`);
   } catch (err) {
-    return null
-    // if (err instanceof Deno.errors.NotFound) {
-    //   return null;
-    // } else {
-    //   throw err;
-    // }
+    if (err instanceof Deno.errors.NotFound) {
+      return null;
+    } else {
+      throw err;
+    }
   }
 
   const { attrs, body } = extract(text);
