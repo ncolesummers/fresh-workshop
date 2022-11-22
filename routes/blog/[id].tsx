@@ -1,14 +1,20 @@
-import { Post } from "../../utils/posts.ts";
+import { loadPost, Post } from "../../utils/posts.ts";
+import { Handlers, PageProps } from "$fresh/server.ts"
 
-const post: Post = {
-  id: "hello",
-  title: "Hello World",
-  publishAt: new Date(),
-  snippet: "This is my first post",
-  content: "Hello Universe!",
-}
+export const handler: Handlers<Post> = {
+  async GET(req, ctx) {
+   const id = ctx.params.id;
+   const post = await loadPost(id);
+   if (!post) {
+     return new Response("Post not found", { status: 404 });
+   }
+   return ctx.render(post);
+  }
+};
 
-export default function BlogPostPage() {
+export default function BlogPostPage(props: PageProps) {
+  const post = props.data;
+
   return (
     <div class="px-4 mx-auto max-w-screen-md">
       <p class="text-gray-600 mt-12">{post.publishAt.toLocaleDateString()}</p>
