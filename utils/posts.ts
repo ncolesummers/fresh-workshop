@@ -1,7 +1,7 @@
 export interface Post {
   id: string;
   title: string;
-  publishedAt: Date
+  publishAt: Date
   snippet: string;
   content: string;
 }
