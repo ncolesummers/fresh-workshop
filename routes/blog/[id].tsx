@@ -8,7 +8,7 @@ const post: Post = {
   content: "Hello Universe!",
 }
 
-export default function Home() {
+export default function BlogPostPage() {
   return (
     <div class="px-4 mx-auto max-w-screen-md">
       <p class="text-gray-600 mt-12">{post.publishAt.toLocaleDateString()}</p>
