@@ -3,7 +3,7 @@ import { extract } from "$std/encoding/front_matter.ts";
 export interface Post {
   id: string;
   title: string;
-  publishAt: Date
+  publishAt: Date;
   snippet: string;
   content: string;
 }
@@ -30,7 +30,7 @@ export async function loadPost(id: string): Promise<Post | null> {
     publishAt,
     snippet: params.snippet,
     content: body,
-  }
+  };
 }
 
 export async function listPosts(): Promise<Post[]> {

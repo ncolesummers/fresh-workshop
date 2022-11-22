@@ -1,4 +1,4 @@
-import { loadPost, listPosts } from "./posts.ts";
+import { listPosts, loadPost } from "./posts.ts";
 
 import { assert, assertEquals } from "$std/testing/asserts.ts";
 

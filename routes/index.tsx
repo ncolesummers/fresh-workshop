@@ -1,15 +1,15 @@
 import { Head } from "$fresh/runtime.ts";
-import { Handlers, PageProps } from "$fresh/server.ts"
+import { Handlers, PageProps } from "$fresh/server.ts";
 import { listPosts, Post } from "../utils/posts.ts";
 
 export const handler: Handlers<Post[]> = {
   async GET(_req, ctx) {
     const posts = await listPosts();
     return ctx.render(posts);
-  }
-}
+  },
+};
 export default function Home(props: PageProps<Post[]>) {
-  const posts = props.data
+  const posts = props.data;
   return (
     <>
       <Head>
@@ -37,5 +37,5 @@ function PostEntry(props: { post: Post }) {
         </div>
       </a>
     </li>
-  )
+  );
 }
