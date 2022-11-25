@@ -15,11 +15,14 @@ export const handler: Handlers<Post> = {
 
 export default function BlogPostPage(props: PageProps) {
   const post = props.data;
+  const dateFmt = new Intl.DateTimeFormat("en-US", {
+    dateStyle: "full",
+    });
   const html = render(post.content);
 
   return (
     <div class="px-4 mx-auto max-w-screen-md">
-      <p class="text-gray-600 mt-12">{post.publishAt.toLocaleDateString()}</p>
+      <p class="text-gray-600 mt-12">{dateFmt.format(post.publishAt)}</p>
       <h1 class="text-5xl mt-2 font-bold">{post.title}</h1>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <div
