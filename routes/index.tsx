@@ -29,7 +29,7 @@ function PostEntry(props: { post: Post }) {
   const { post } = props;
   const dateFmt = new Intl.DateTimeFormat("en-US", {
     dateStyle: "short",
-    });
+  });
   return (
     <li class="border-t ">
       <a href={`/blog/${post.id}`} class="py-2 flex gap-4 group">

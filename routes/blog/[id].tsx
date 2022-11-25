@@ -1,23 +1,28 @@
 import { loadPost, Post } from "../../utils/posts.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { CSS, render } from "https://deno.land/x/gfm@0.1.26/mod.ts";
+import { State } from "../../utils/state.ts";
 
-export const handler: Handlers<Post> = {
+interface Data extends State {
+  post: Post;
+}
+
+export const handler: Handlers<Data, State> = {
   async GET(req, ctx) {
     const id = ctx.params.id;
     const post = await loadPost(id);
     if (!post) {
       return new Response("Post not found", { status: 404 });
     }
-    return ctx.render(post);
+    return ctx.render({ ...ctx.state, post });
   },
 };
 
-export default function BlogPostPage(props: PageProps) {
-  const post = props.data;
-  const dateFmt = new Intl.DateTimeFormat("en-US", {
+export default function BlogPostPage(props: PageProps<Data>) {
+  const { post, locales } = props.data;
+  const dateFmt = new Intl.DateTimeFormat(locales, {
     dateStyle: "full",
-    });
+  });
   const html = render(post.content);
 
   return (
